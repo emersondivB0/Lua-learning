@@ -75,3 +75,23 @@ Lua also offers an exponentiation operator, denoted by a caret (^). Like divisio
 `< > <= >= == ~= `
 
 All these operators always produce a Boolean value. 
+
+## The Mathematical Library 
+
+Lua provides a standard math library with a set of mathematical functions, including trigonometric func-tions (sin, cos, tan, asin, etc.), logarithms, rounding functions, max and min, a function for gen-erating pseudo-random numbers (random), plus the constants pi and huge (the largest representable number, which is the special value inf on most platforms.)  
+
+```lua
+> math.sin(math.pi / 2) --> 1.0  
+> math.max(10.4, 7, -3, 20) --> 20  
+> math.huge --> inf 
+```
+
+All trigonometric functions work in radians. We can use the functions deg and rad to convert between degrees and radians.
+
+### Random-number generator
+
+We can call the `math.random()` function in three ways. When we call it without arguments, it returns a pseudo-random real number with uniform distribution in the interval [0,1). When we call it with only one argument, an integer n, it returns a pseudo-random integer in the interval [1,n]. For instance, we can simulate the result of tossing a die with the call `random(6)`. Finally, we can call random with two integer arguments, l and u, to get a pseudo-random integer in the interval [l,u].
+
+### Rounding Functions 
+
+The math library offers three rounding functions: floor, ceil, and modf. Floor rounds towards minus infinite, ceil rounds towards plus infinite, and modf rounds towards zero. They return an integer result if it fits in an integer; otherwise, they return a float (with an integral value, of course). The function modf, besides the rounded value, also returns the fractional part of the number as a second result.
