@@ -1,13 +1,30 @@
 # Lua Learning Path
 
-![](https://www.lua.org/images/logo.gif) 
+![](https://www.lua.org/images/logo.gif)
+
+## Table of Content
+<!-- mtoc-start -->
+
+* [Types and Values](#types-and-values)
+  * [Nil](#nil)
+  * [Booleans](#booleans)
+  * [Operators](#operators)
+    * [Logical Operators](#logical-operators)
+    * [Aritmethic Operators](#aritmethic-operators)
+    * [Relational Operators](#relational-operators)
+* [The Mathematical Library](#the-mathematical-library)
+  * [Random-number generator](#random-number-generator)
+  * [Rounding Functions](#rounding-functions)
+  * [Conversions](#conversions)
+
+<!-- mtoc-end -->
 
 ## Types and Values
 
 Lua is a dynamically-typed language. There are no type definitions in the language; each value carries its own type.
 There are eight basic types in Lua: nil, Boolean, number, string, userdata, function, thread, and table. The function type gives the type name of any given value:
 
-```lua 
+```lua
 > type(nil) --> nil  
 > type(true) --> boolean  
 > type(10.4 * 3) --> number  
@@ -25,12 +42,12 @@ The userdata type allows arbitrary C data to be stored in Lua variables. It has 
 
 Nil is a type with a single value, nil, whose main property is to be different from any other value. Lua uses nil as a kind of non-value, to represent the absence of a useful value. As we have seen, a global variable has a nil value by default, before its first assignment, and we can assign nil to a global variable to delete it.
 
-### Booleans 
+### Booleans
 
 The Boolean type has two values, `@false{}` and `@true{}`, which represent the traditional Boolean values.
 However, Booleans do not hold a monopoly of condition values: in Lua, any value can represent a condition. Conditional tests (e.g., conditions in control structures) consider both the Boolean false and nil as false and anything else as true. In particular, Lua considers both zero and the empty string as true in conditional tests.
 
-### Operators 
+### Operators
 
 #### Logical Operators
 
@@ -48,8 +65,7 @@ Lua supports a conventional set of logical operators: `and`, `or`, and `not`. Li
 
 Both and and or use short-circuit evaluation, that is, they evaluate their second operand only when nec-essary. Short-circuit evaluation ensures that expressions like (i ~= 0 and a/i > b) do not cause run-time errors: Lua will not try to evaluate a / i when i is zero.
 
-The `not` operator always gives a Boolean value. 
-
+The `not` operator always gives a Boolean value.
 
 #### Aritmethic Operators
 
@@ -72,11 +88,11 @@ Lua also offers an exponentiation operator, denoted by a caret (^). Like divisio
 
 #### Relational Operators
 
-`< > <= >= == ~= `
+`< > <= >= == ~=`
 
-All these operators always produce a Boolean value. 
+All these operators always produce a Boolean value.
 
-## The Mathematical Library 
+## The Mathematical Library
 
 Lua provides a standard math library with a set of mathematical functions, including trigonometric func-tions (sin, cos, tan, asin, etc.), logarithms, rounding functions, max and min, a function for gen-erating pseudo-random numbers (random), plus the constants pi and huge (the largest representable number, which is the special value inf on most platforms.)  
 
@@ -92,6 +108,25 @@ All trigonometric functions work in radians. We can use the functions deg and ra
 
 We can call the `math.random()` function in three ways. When we call it without arguments, it returns a pseudo-random real number with uniform distribution in the interval [0,1). When we call it with only one argument, an integer n, it returns a pseudo-random integer in the interval [1,n]. For instance, we can simulate the result of tossing a die with the call `random(6)`. Finally, we can call random with two integer arguments, l and u, to get a pseudo-random integer in the interval [l,u].
 
-### Rounding Functions 
+### Rounding Functions
 
-The math library offers three rounding functions: floor, ceil, and modf. Floor rounds towards minus infinite, ceil rounds towards plus infinite, and modf rounds towards zero. They return an integer result if it fits in an integer; otherwise, they return a float (with an integral value, of course). The function modf, besides the rounded value, also returns the fractional part of the number as a second result.
+The math library offers three rounding functions: `floor`, `ceil`, and `modf`. Floor rounds towards minus infinite, `ceil` rounds towards plus infinite, and `modf` rounds towards zero. They return an integer result if it fits in an integer; otherwise, they return a float (with an integral value, of course). The function `modf`, besides the rounded value, also returns the fractional part of the number as a second result.
+
+### Conversions
+
+Any integer can be converted to double just adding 0.0 to it.
+
+Yo convert any float to an integer, just make it `OR` to 0:
+
+```lua
+9.08 | 0 --> 9
+```
+
+Another way to force a number into an integer is to use `math.tointeger`, which returns nil when the number cannot be converted:
+
+```lua
+> math.tointeger(-258.0) --> -258  
+> math.tointeger(2^30) --> 1073741824  
+> math.tointeger(5.01) --> nil (not an integral value)  
+> math.tointeger(2^64) --> nil (out of range)
+```
