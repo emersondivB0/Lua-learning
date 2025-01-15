@@ -12,10 +12,13 @@
     * [Logical Operators](#logical-operators)
     * [Aritmethic Operators](#aritmethic-operators)
     * [Relational Operators](#relational-operators)
+  * [Precedence](#precedence)
 * [The Mathematical Library](#the-mathematical-library)
   * [Random-number generator](#random-number-generator)
   * [Rounding Functions](#rounding-functions)
   * [Conversions](#conversions)
+* [Strings  ](#strings--)
+  * [Literal Strings  ](#literal-strings--)
 
 <!-- mtoc-end -->
 
@@ -92,6 +95,25 @@ Lua also offers an exponentiation operator, denoted by a caret (^). Like divisio
 
 All these operators always produce a Boolean value.
 
+### Precedence
+
+Operator precedence in Lua follows the table below, from the higher to the lower priority:
+
+| Operators |
+| ------------- |
+| ^  |
+| unary operators (- # ~ not)  |
+| * / // %  |
+| + - |
+| .. (concatentation)  |
+| << >> (bitwise shifts)  |
+| & (bitwise AND)  |
+| ~ (bitwise exclusive OR)  |
+| \| (bitwise OR)  |
+| < > <= >= ~= ==  |
+| and  |
+| or |
+
 ## The Mathematical Library
 
 Lua provides a standard math library with a set of mathematical functions, including trigonometric func-tions (sin, cos, tan, asin, etc.), logarithms, rounding functions, max and min, a function for gen-erating pseudo-random numbers (random), plus the constants pi and huge (the largest representable number, which is the special value inf on most platforms.)  
@@ -130,3 +152,43 @@ Another way to force a number into an integer is to use `math.tointeger`, which 
 > math.tointeger(5.01) --> nil (not an integral value)  
 > math.tointeger(2^64) --> nil (out of range)
 ```
+
+## Strings  
+
+Strings in Lua are immutable values. We cannot change a character inside a string, as we can in C; instead, we create a new string with the desired modifications.
+
+```lua  
+a = "one string"  
+b = string.gsub(a, "one", "another") -- change string parts  
+print(a) --> one string  
+print(b) --> another string
+```
+
+Strings in Lua are subject to automatic memory management, like all other Lua objects (tables, functions, etc.). This means that we do not have to worry about allocation and deallocation of strings; Lua handles it for us.
+
+We can get the length of a string using the length operator (denoted by #).
+
+This operator always counts the length in bytes, which is not the same as characters in some encodings.
+
+We can concatenate two strings with the concatenation operator .. (two dots). If any operand is a number, Lua converts this number to a string
+
+### Literal Strings  
+
+We can delimit literal strings by single or double matching quotes.
+
+They are equivalent; the only difference is that inside each kind of quote we can use the other quote without escapes.
+
+Strings in Lua can contain the following C-like escape sequences:
+
+|Sequence| Value|
+|--------|------|
+|\a| bell|
+|\b| back space|
+|\f| form feed|
+|\n|newline |
+|\r| carriage return |
+|\t| horizontal tab |
+|\v| vertical tab |
+|\\|backslash |
+|\"| double quote |
+|\'| single quote|
