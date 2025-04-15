@@ -19,6 +19,7 @@
   * [Conversions](#conversions)
 * [Strings  ](#strings--)
   * [Literal Strings  ](#literal-strings--)
+  * [Long Strings  ](#long-strings--)
 
 <!-- mtoc-end -->
 
@@ -192,3 +193,26 @@ Strings in Lua can contain the following C-like escape sequences:
 |\\|backslash |
 |\"| double quote |
 |\'| single quote|
+
+
+### Long Strings  
+
+Long strings can be delimited by double square brackets, being able to write multilineal strings.
+
+```lua
+page = [[  
+  <html>  
+    <head>  
+      <title>An HTML Page</title>  
+    </head>  
+    <body>  
+      <a href="http://www.lua.org">Lua</a>  
+    </body>  
+  </html>  
+]]   
+
+write(page)
+
+```
+
+
