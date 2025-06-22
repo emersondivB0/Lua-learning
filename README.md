@@ -3,24 +3,25 @@
 ![](https://www.lua.org/images/logo.gif)
 
 ## Table of Content
+
 <!-- mtoc-start -->
 
-* [Types and Values](#types-and-values)
-  * [Nil](#nil)
-  * [Booleans](#booleans)
-  * [Operators](#operators)
-    * [Logical Operators](#logical-operators)
-    * [Aritmethic Operators](#aritmethic-operators)
-    * [Relational Operators](#relational-operators)
-  * [Precedence](#precedence)
-* [The Mathematical Library](#the-mathematical-library)
-  * [Random-number generator](#random-number-generator)
-  * [Rounding Functions](#rounding-functions)
-  * [Conversions](#conversions)
-* [Strings](#strings--)
-  * [Literal Strings](#literal-strings--)
-  * [Long Strings](#long-strings--)
-  * [String Library](#string-library)
+- [Types and Values](#types-and-values)
+  - [Nil](#nil)
+  - [Booleans](#booleans)
+  - [Operators](#operators)
+    - [Logical Operators](#logical-operators)
+    - [Aritmethic Operators](#aritmethic-operators)
+    - [Relational Operators](#relational-operators)
+  - [Precedence](#precedence)
+- [The Mathematical Library](#the-mathematical-library)
+  - [Random-number generator](#random-number-generator)
+  - [Rounding Functions](#rounding-functions)
+  - [Conversions](#conversions)
+- [Strings](#strings--)
+  - [Literal Strings](#literal-strings--)
+  - [Long Strings](#long-strings--)
+  - [String Library](#string-library)
 
 <!-- mtoc-end -->
 
@@ -30,14 +31,14 @@ Lua is a dynamically-typed language. There are no type definitions in the langua
 There are eight basic types in Lua: nil, Boolean, number, string, userdata, function, thread, and table. The function type gives the type name of any given value:
 
 ```lua
-> type(nil) --> nil  
-> type(true) --> boolean  
-> type(10.4 * 3) --> number  
-> type("Hello world") --> string  
-> type(io.stdin) --> userdata  
-> type(print) --> function  
-> type(type) --> function  
-> type({}) --> table  
+> type(nil) --> nil
+> type(true) --> boolean
+> type(10.4 * 3) --> number
+> type("Hello world") --> string
+> type(io.stdin) --> userdata
+> type(print) --> function
+> type(type) --> function
+> type({}) --> table
 > type(type(X)) --> string
 ```
 
@@ -60,11 +61,11 @@ Lua supports a conventional set of logical operators: `and`, `or`, and `not`. Li
 
 ```lua
 
-> 4 and 5 --> 5  
-> nil and 13 --> nil  
-> false and 13 --> false  
-> 0 or 5 --> 0  
-> false or "hi" --> "hi"  
+> 4 and 5 --> 5
+> nil and 13 --> nil
+> false and 13 --> false
+> 0 or 5 --> 0
+> false or "hi" --> "hi"
 > nil or false --> false
 ```
 
@@ -79,13 +80,13 @@ Lua presents the usual set of arithmetic operators: addition, subtraction, multi
 For integer division, floor division and denoted by `//`. As its name implies, floor division always rounds the quotient towards minus infinity, ensuring an integral result for all operands. With this definition, this operation can follow the same rule of the other arithmetic operators: if both operands are integers, the result is an integer; otherwise, the result is a float (with an integral value)
 
 The following equation defines the modulo operator:
- `a % b == a - ((a // b) * b)`
+`a % b == a - ((a // b) * b)`
 
 For real operands, modulo has some unexpected uses. For instance, x - x % 0.01 is x with exactly two decimal digits, and x - x % 0.001 is x with exactly three decimal digits:
 
 ```lua
- > x = math.pi  
- > x - x%0.01 --> 3.14  
+ > x = math.pi
+ > x - x%0.01 --> 3.14
  > x - x%0.001 --> 3.141
 ```
 
@@ -101,29 +102,29 @@ All these operators always produce a Boolean value.
 
 Operator precedence in Lua follows the table below, from the higher to the lower priority:
 
-| Operators |
-| ------------- |
-| ^  |
-| unary operators (- # ~ not)  |
-| * / // %  |
-| + - |
-| .. (concatentation)  |
-| << >> (bitwise shifts)  |
-| & (bitwise AND)  |
-| ~ (bitwise exclusive OR)  |
-| \| (bitwise OR)  |
-| < > <= >= ~= ==  |
-| and  |
-| or |
+| Operators                   |
+| --------------------------- |
+| ^                           |
+| unary operators (- # ~ not) |
+| \* / // %                   |
+| + -                         |
+| .. (concatentation)         |
+| << >> (bitwise shifts)      |
+| & (bitwise AND)             |
+| ~ (bitwise exclusive OR)    |
+| \| (bitwise OR)             |
+| < > <= >= ~= ==             |
+| and                         |
+| or                          |
 
 ## The Mathematical Library
 
-Lua provides a standard math library with a set of mathematical functions, including trigonometric func-tions (sin, cos, tan, asin, etc.), logarithms, rounding functions, max and min, a function for gen-erating pseudo-random numbers (random), plus the constants pi and huge (the largest representable number, which is the special value inf on most platforms.)  
+Lua provides a standard math library with a set of mathematical functions, including trigonometric func-tions (sin, cos, tan, asin, etc.), logarithms, rounding functions, max and min, a function for gen-erating pseudo-random numbers (random), plus the constants pi and huge (the largest representable number, which is the special value inf on most platforms.)
 
 ```lua
-> math.sin(math.pi / 2) --> 1.0  
-> math.max(10.4, 7, -3, 20) --> 20  
-> math.huge --> inf 
+> math.sin(math.pi / 2) --> 1.0
+> math.max(10.4, 7, -3, 20) --> 20
+> math.huge --> inf
 ```
 
 All trigonometric functions work in radians. We can use the functions deg and rad to convert between degrees and radians.
@@ -149,20 +150,20 @@ Yo convert any float to an integer, just make it `OR` to 0:
 Another way to force a number into an integer is to use `math.tointeger`, which returns nil when the number cannot be converted:
 
 ```lua
-> math.tointeger(-258.0) --> -258  
-> math.tointeger(2^30) --> 1073741824  
-> math.tointeger(5.01) --> nil (not an integral value)  
+> math.tointeger(-258.0) --> -258
+> math.tointeger(2^30) --> 1073741824
+> math.tointeger(5.01) --> nil (not an integral value)
 > math.tointeger(2^64) --> nil (out of range)
 ```
 
-## Strings  
+## Strings
 
 Strings in Lua are immutable values. We cannot change a character inside a string, as we can in C; instead, we create a new string with the desired modifications.
 
-```lua  
-a = "one string"  
-b = string.gsub(a, "one", "another") -- change string parts  
-print(a) --> one string  
+```lua
+a = "one string"
+b = string.gsub(a, "one", "another") -- change string parts
+print(a) --> one string
 print(b) --> another string
 ```
 
@@ -174,7 +175,7 @@ This operator always counts the length in bytes, which is not the same as charac
 
 We can concatenate two strings with the concatenation operator .. (two dots). If any operand is a number, Lua converts this number to a string
 
-### Literal Strings  
+### Literal Strings
 
 We can delimit literal strings by single or double matching quotes.
 
@@ -182,35 +183,35 @@ They are equivalent; the only difference is that inside each kind of quote we ca
 
 Strings in Lua can contain the following C-like escape sequences:
 
-|Sequence| Value|
-|--------|------|
-|\a| bell|
-|\b| back space|
-|\f| form feed|
-|\n|newline |
-|\r| carriage return |
-|\t| horizontal tab |
-|\v| vertical tab |
-|\\|backslash |
-|\"| double quote |
-|\'| single quote|
+| Sequence | Value           |
+| -------- | --------------- |
+| \a       | bell            |
+| \b       | back space      |
+| \f       | form feed       |
+| \n       | newline         |
+| \r       | carriage return |
+| \t       | horizontal tab  |
+| \v       | vertical tab    |
+| \\       | backslash       |
+| \"       | double quote    |
+| \'       | single quote    |
 
 The following examples illustrate their use:
 
-```lua  
-> print("one line\nnext line\n\"in quotes\", 'in quotes'")  
---> one line  
---> next line  
---> "in quotes", 'in quotes'  
-> print('a backslash inside quotes: \'\\\'')  
---> a backslash inside quotes: '\'  
-> print("a simpler way: '\\'")  
+```lua
+> print("one line\nnext line\n\"in quotes\", 'in quotes'")
+--> one line
+--> next line
+--> "in quotes", 'in quotes'
+> print('a backslash inside quotes: \'\\\'')
+--> a backslash inside quotes: '\'
+> print("a simpler way: '\\'")
 --> a simpler way: '\'
 ```
 
-### Long Strings  
+### Long Strings
 
-The long string in Lua is a way to define strings than span multiple lines without the need for escape characters. To create a long string, we can use double square brackets [[ and ]] to delimit the string. The content of the string can include line breaks and any other characters without the need for escaping.
+The long string in Lua is a way to define strings than span multiple lines without the need for escape characters. To create a long string, we can use double square brackets [[and]] to delimit the string. The content of the string can include line breaks and any other characters without the need for escaping.
 
 ### String Library
 
@@ -218,8 +219,8 @@ The string library assumes one-byte characters.
 Some functions in the string library are quite simple: the call `string.len(s)` returns the length of a string `s`; it is equivalent to `#s`. The call `string.rep(s, n)` returns the string `s` repeated n times; we can create a string of 1 MB (e.g., for tests) with `string.rep("a", 2^20)`. The function `string.reverse` reverses a string. The call `string.lower(s)` returns a copy of `s` with the up-per-case letters converted to lower case; all other characters in the string are unchanged. The function `string.upper` converts to upper case.
 
 ```lua
-> string.rep("abc", 3) --> abcabcabc  
-> string.reverse("A Long Line!") --> !eniL gnoL A  
+> string.rep("abc", 3) --> abcabcabc
+> string.reverse("A Long Line!") --> !eniL gnoL A
 > string.lower("A Long Line!") --> a long line!
 > string.upper("A Long Line!") --> A LONG LINE!
 ```
@@ -227,9 +228,9 @@ Some functions in the string library are quite simple: the call `string.len(s)` 
 The call `string.sub(s, i, j)` extracts a piece of the string `s`, from the `i`-th to the `j`-th character inclusive. (The first character of a string has index 1.) We can also use negative indices, which count from the end of the string: index -1 refers to the last character, -2 to the previous one, and so on. Therefore, the call `string.sub(s, 1, j)` gets a prefix of the string `s` with length `j`; `string.sub(s, j, -1)` gets a suffix of the string, starting at the `j`-th character; and `string.sub(s, 2, -2)` returns a copy of the string `s` with the first and last characters removed:
 
 ```lua
-> s = "[in brackets]"  
-> string.sub(s, 2, -2) --> in brackets  
-> string.sub(s, 1, 1) --> [  
+> s = "[in brackets]"
+> string.sub(s, 2, -2) --> in brackets
+> string.sub(s, 1, 1) --> [
 > string.sub(s, -1, -1) --> ]
 ```
 
@@ -243,10 +244,10 @@ The functions `string.char` and `string.byte` convert between characters and the
 The following examples assume the ASCII encoding for characters:
 
 ```lua
-print(string.char(97)) --> a  
-i = 99; print(string.char(i, i+1, i+2)) --> cde 
-print(string.byte("abc")) --> 97  
-print(string.byte("abc", 2)) --> 98  
+print(string.char(97)) --> a
+i = 99; print(string.char(i, i+1, i+2)) --> cde
+print(string.byte("abc")) --> 97
+print(string.byte("abc", 2)) --> 98
 print(string.byte("abc", -1)) --> 99
 ```
 
@@ -261,19 +262,19 @@ A nice idiom is {`string.byte(s, 1, -1)`}, which creates a list with the codes o
 The function `string.format` is a powerful tool for formatting strings and converting numbers to strings. It returns a copy of its first argument, the so-called format string, with each directive in that string replaced by a formatted version of its correspondent argument. The directives in the format string have rules similar to those of the C function printf. A directive is a percent sign plus a letter that tells how to format the argument: `d` for a decimal integer, `x` for hexadecimal, `f` for a floating-point number, `s` for strings, plus several others.
 
 ```lua
-> string.format("x = %d y = %d", 10, 20) --> x = 10 y = 20  
-> string.format("x = %x", 200) --> x = c8  
-> string.format("x = 0x%X", 200) --> x = 0xC8  
-> string.format("x = %f", 200) --> x = 200.000000  
-> tag, title = "h1", "a title"  
+> string.format("x = %d y = %d", 10, 20) --> x = 10 y = 20
+> string.format("x = %x", 200) --> x = c8
+> string.format("x = 0x%X", 200) --> x = 0xC8
+> string.format("x = %f", 200) --> x = 200.000000
+> tag, title = "h1", "a title"
 > string.format("<%s>%s</%s>", tag, title, tag)  --> <h1>a title</h1>
 ```
 
 Between the percent sign and the letter, a directive can include other options that control the details of the formatting, such as the number of decimal digits of a floating-point number:
 
 ```lua
-print(string.format("pi = %.4f", math.pi)) --> pi = 3.1416  
-d = 5; m = 11; y = 1990  
+print(string.format("pi = %.4f", math.pi)) --> pi = 3.1416
+d = 5; m = 11; y = 1990
 print(string.format("%02d/%02d/%04d", d, m, y)) --> 05/11/1990
 ```
 
@@ -282,7 +283,7 @@ We can call all functions from the string library as methods on strings, using t
 The string library includes also several functions based on pattern matching. The function `string.find` searches for a pattern in a given string:
 
 ```lua
-> string.find("hello world", "wor") --> 7 9  
+> string.find("hello world", "wor") --> 7 9
 > string.find("hello world", "war") --> nil
 ```
 
@@ -290,9 +291,11 @@ It returns the initial and final positions of the pattern in the string, or `nil
 The function `string.gsub` (Global SUBstitution) replaces all occurrences of a pattern in a string with another string:
 
 ```lua
-> string.gsub("hello world", "l", ".") --> he..o wor.d 3  
-> string.gsub("hello world", "ll", "..") --> he..o world 1  
+> string.gsub("hello world", "l", ".") --> he..o wor.d 3
+> string.gsub("hello world", "ll", "..") --> he..o world 1
 > string.gsub("hello world", "a", ".") --> hello world 0
 ```
 
 It also returns, as a second result, the number of replacements it made.
+
+Next we will discuss Tables.
